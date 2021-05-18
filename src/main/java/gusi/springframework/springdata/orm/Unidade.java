@@ -8,50 +8,46 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
 @Entity
-@Table(name = "cargos")
-public class Cargo {
+public class Unidade {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private int id; 
 	private String descricao;
+	private String endereco;
 	
-	@OneToMany(mappedBy = "cargo")	
+	@OneToMany(mappedBy = "unidade")	
 	private List<Funcionario> funcionario;
-
+	
+	
 	
 	public List<Funcionario> getFuncionario() {
 		return funcionario;
 	}
-
 	public void setFuncionario(List<Funcionario> funcionario) {
 		this.funcionario = funcionario;
 	}
-
-	public Integer getId() {
+	public int getId() {
 		return id;
 	}
-
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
 	}
-
 	public String getDescricao() {
 		return descricao;
 	}
-
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-
-	@Override
-	public String toString() {
-		return "Cargo [id=" + id + ", descricao=" + descricao + "]";
+	public String getEndereco() {
+		return endereco;
+	}
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
 	}
 	
 	
-
+	
 }

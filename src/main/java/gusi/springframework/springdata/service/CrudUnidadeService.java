@@ -5,22 +5,23 @@ import java.util.Scanner;
 import org.springframework.stereotype.Service;
 
 import gusi.springframework.springdata.orm.Cargo;
-import gusi.springframework.springdata.repository.CargoRepository;
+import gusi.springframework.springdata.orm.Unidade;
+import gusi.springframework.springdata.repository.UnidadeRepository;
 
 @Service
-public class CrudCargoService {
-	
+public class CrudUnidadeService {
+
 	private Boolean system = true;
-	private final CargoRepository cargoRepository;
+	private UnidadeRepository unidadeRepository; 
 	
-	public CrudCargoService(CargoRepository cargoRepository) { 
-		this.cargoRepository = cargoRepository;
+	public CrudUnidadeService(UnidadeRepository unidadeRepository) { 
+		this.unidadeRepository = unidadeRepository;
 	}
 	
 	public void inicial(Scanner scanner) { 
 		
 		while(system) { 
-			System.out.println("Qual ação de cargo deseja executar?");
+			System.out.println("Qual ação de unidade deseja executar?");
 			System.out.println("0 - Sair");
 			System.out.println("1 - Salvar");
 			System.out.println("2 - Atualizar");
@@ -46,15 +47,16 @@ public class CrudCargoService {
 				system = false;
 				break;
 			}
-		}		
+				
+		}
 	}
 	
 	private void salvar(Scanner scanner) { 
-		System.out.println("Descrição do cargo");
+		System.out.println("Descrição do unidade");
 		String descricao = scanner.next();
-		Cargo cargo = new Cargo();
-		cargo.setDescricao(descricao);
-		cargoRepository.save(cargo);
+		Unidade unidade= new Unidade();
+		unidade.setDescricao(descricao);
+		unidadeRepository.save(unidade);
 		System.out.println("Salvo com sucesso");
 	}
 	
@@ -64,23 +66,25 @@ public class CrudCargoService {
 		System.out.println("Informe a nova Descrição");
 		String novaDescricao = scanner.next();
 		
-		Cargo cargo = new Cargo();
-		cargo.setId(id);
-		cargo.setDescricao(novaDescricao);
+		Unidade unidade= new Unidade();
+		unidade.setId(id);
+		unidade.setDescricao(novaDescricao);
 		
-		cargoRepository.save(cargo);
+		unidadeRepository.save(unidade);
 		System.out.println("Atualizado");
 	}
 	
 	private void visualizar() { 
-		Iterable<Cargo> cargos = cargoRepository.findAll();
-		cargos.forEach(cargo -> System.out.println(cargo));
+		Iterable<Unidade> unidades= unidadeRepository.findAll();
+		unidades.forEach(u-> System.out.println(u));
 	}
 	
 	private void deletar(Scanner scanner) { 
 		System.out.println("Digite o ID:");
 		int id = scanner.nextInt();
-		cargoRepository.deleteById(id);
+		unidadeRepository.deleteById(id);
 		System.out.println("Deletado");
 	}
+	
+	
 }
