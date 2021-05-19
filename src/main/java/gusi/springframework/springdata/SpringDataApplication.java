@@ -9,6 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import gusi.springframework.springdata.service.CrudCargoService;
 import gusi.springframework.springdata.service.CrudFuncionarioService;
 import gusi.springframework.springdata.service.CrudUnidadeService;
+import gusi.springframework.springdata.service.RelatorioFuncionarioDinamico;
 import gusi.springframework.springdata.service.RelatoriosService;
 
 @SpringBootApplication
@@ -18,17 +19,20 @@ public class SpringDataApplication implements CommandLineRunner{
 	private final CrudFuncionarioService funcionarioService;
 	private final CrudUnidadeService unidadeService; 
 	private final RelatoriosService relatoriosService;
+	private final RelatorioFuncionarioDinamico relatorioFuncionarioDinamico;
 	
 	private Boolean system = true;
 	
 	public SpringDataApplication(CrudCargoService cargoService, 
 						  CrudFuncionarioService funcionarioService,
 						  CrudUnidadeService unidadeService,
-						  RelatoriosService relatorioService) { 
+						  RelatoriosService relatorioService,
+						  RelatorioFuncionarioDinamico relatorioFuncionarioDinamico) { 
 		this.cargoService	= cargoService;
 		this.funcionarioService = funcionarioService;
 		this.unidadeService = unidadeService;
 		this.relatoriosService = relatorioService;
+		this.relatorioFuncionarioDinamico = relatorioFuncionarioDinamico;
 	}
 	
 	public static void main(String[] args) {
@@ -47,6 +51,7 @@ public class SpringDataApplication implements CommandLineRunner{
 			System.out.println("2 - Funcionario");
 			System.out.println("3 - Unidade");
 			System.out.println("4 - Relatórios");
+			System.out.println("5 - Relatório Dinâmico");
 			
 			
 			int action = scanner.nextInt();

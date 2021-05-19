@@ -4,6 +4,10 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Scanner;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import gusi.springframework.springdata.orm.Funcionario;
@@ -39,7 +43,7 @@ public class CrudFuncionarioService {
 				atualizar(scanner);
 				break;
 			case 3:
-				visualizar();
+				visualizar(scanner);
 				break;
 			case 4:
 				deletar(scanner);
@@ -87,8 +91,17 @@ public class CrudFuncionarioService {
 		System.out.println("Atualizado");
 	}
 	
-	private void visualizar() { 
-		Iterable<Funcionario> funcionarios = funcionarioRepository.findAll();
+	private void visualizar(Scanner scanner) { 
+		System.out.println("Qual página você deseja visualizar?");
+		int page = scanner.nextInt();
+		
+		Pageable pageable = PageRequest.of(page, 10, Sort.by(Sort.Direction.ASC, "nome"));
+		
+		Page<Funcionario> funcionarios = funcionarioRepository.findAll(pageable);
+		
+		System.out.println(funcionarios);
+		System.out.println("Página atual " + funcionarios.getNumber());
+		System.out.println("Total de elementos: " + funcionarios.getTotalElements());
 		funcionarios.forEach(f -> System.out.println(f));
 	}
 	
